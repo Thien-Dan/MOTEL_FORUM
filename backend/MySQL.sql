@@ -5,9 +5,12 @@ USE PHONGTRO;
 CREATE TABLE Users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     fullname VARCHAR(100) NOT NULL,
+    login_name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
-    phone VARCHAR(20),
+    phone VARCHAR(20) NOT NULL,
+    CCCD VARCHAR(20) NOT NULL,
+    birthday DATE,
     avatar TEXT,
     role ENUM('user', 'admin') DEFAULT 'user',
     is_banned BOOLEAN DEFAULT FALSE,

@@ -1,8 +1,12 @@
-document.getElementById('loginForm').addEventListener('submit', async function(e) {
+document.getElementById('loginForm').addEventListener('submit', async function (e) {
     e.preventDefault(); // Không reload trang
 
     const user = document.getElementById('username').value;
     const pass = document.getElementById('password').value;
+    const submitBtn = this.querySelector('.auth-btn');
+
+    // Hiệu ứng Loading
+    submitBtn.classList.add('btn-loading');
 
     console.log("Đang kiểm tra đăng nhập cho:", user);
 
@@ -12,7 +16,6 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     };
 
     try {
-        // Đổi port từ 5000 (Python) sang 3000 (Node.js)
         let res = await fetch("http://127.0.0.1:3000/api/login", {
             method: "POST",
             headers: {
@@ -26,16 +29,23 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         // Kiểm tra HTTP status code (200-299 là thành công)
         if (res.ok) {
             alert(result.message || "Đăng nhập thành công!");
-            // Sau này bạn có thể thêm logic lưu token và chuyển trang ở đây:
-            // localStorage.setItem('user_id', result.userId);
-            // window.location.href = '/home.html';
+            localStorage.setItem('user_id', result.userId);
+            localStorage.setItem('user_role', result.role);
+            
+            // Xử lý điều hướng luồng phân quyền dựa vào `role`
+            if (result.role === 'admin') {
+                window.location.href = '../../admin/dashboard.html'; // Tới trang Admin
+            } else {
+                window.location.href = '../../homepage/index.html'; // Tới trang User
+            }
         } else {
-            // Lấy thông báo lỗi từ backend
-            alert(result.error); 
+            alert(result.error || "Tên đăng nhập hoặc mật khẩu sai!");
         }
 
-    } catch(err) {
+    } catch (err) {
         console.error(err);
         alert("Không thể kết nối server Node.js. Hãy kiểm tra xem server đã bật chưa.");
+    } finally {
+        submitBtn.classList.remove('btn-loading');
     }
 });

@@ -1,29 +1,39 @@
-document.getElementById('resetPwdForm').addEventListener('submit', async function(e) {
+document.getElementById('resetPwdForm').addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    const username = document.getElementsByName('username')[0].value.trim();
-    const phone = document.getElementsByName('phone')[0].value.trim();
+    const username = document.getElementById('username').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
     const newPass = document.getElementById('new_password').value;
     const confirmPass = document.getElementById('confirm_password').value;
+    
+    const submitBtn = this.querySelector('.auth-btn');
 
-    if (!username || !phone || !newPass || !confirmPass) {
-        alert("Vui lòng nhập đầy đủ thông tin!");
+    if (!username || !email || !phone || !newPass || !confirmPass) {
+        alert("Vui lòng nhập đầy đủ thông tin xác thực!");
         return;
     }
-    
+
     if (newPass !== confirmPass) {
-        alert("Mật khẩu không khớp!");
+        alert("Mật khẩu xác nhận không khớp!");
+        return;
+    }
+
+    if (newPass.length < 6) {
+        alert("Mật khẩu mới phải có ít nhất 6 ký tự!");
         return;
     }
 
     const data = {
         username: username,
+        email: email,
         phone: phone,
         new_password: newPass
     };
 
+    submitBtn.classList.add('btn-loading');
+
     try {
-        // Cập nhật URL gọi đến Node.js
         let res = await fetch('http://127.0.0.1:3000/api/forgot-password', {
             method: 'POST',
             headers: {
@@ -34,17 +44,16 @@ document.getElementById('resetPwdForm').addEventListener('submit', async functio
 
         let result = await res.json();
 
-        // Node.js sẽ trả về mã 200-299 nếu thành công, nên ta chỉ cần check res.ok
-        if (res.ok) { 
-            alert(result.message || "Đổi mật khẩu thành công");
+        if (res.ok) {
+            alert(result.message || "Đổi mật khẩu thành công!");
             window.location.href = "../login/login.html";
         } else {
-            // Hiển thị lỗi từ backend (vd: Sai số điện thoại)
-            alert(result.error || "Có lỗi xảy ra");
+            alert(result.error || "Có lỗi xảy ra (Sai tài khoản, email hoặc SDT).");
         }
     } catch (err) {
         console.error('Error:', err);
-        // Cập nhật lại câu thông báo
-        alert("Không thể kết nối đến máy chủ. Hãy đảm bảo server Node.js đang chạy!");
+        alert("Không thể kết nối đến máy chủ Node.js. Vui lòng kiểm tra lại dịch vụ backend.");
+    } finally {
+        submitBtn.classList.remove('btn-loading');
     }
 });
