@@ -1,0 +1,130 @@
+/* Reset định dạng cơ bản */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    /* Hình nền cố định */
+    background-image: url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.login-form {
+    background: rgba(255, 255, 255, 0.9); /* Màu trắng đục */
+    padding: 40px;
+    border-radius: 15px; /* Bo góc */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: 600;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0,123,255,0.2);
+}
+
+
+.login-btn:hover {
+    background-color: #0056b3;
+}
+
+.extra-links {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.extra-links a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.extra-links a:hover {
+    text-decoration: underline;
+}
+
+.forgot-pwd {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.register-container {
+    width: 100%;
+    max-width: 550px; /* Rộng hơn trang login một chút */
+    padding: 20px;
+}
+
+.register-form {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.input-row {
+    display: flex;
+    gap: 15px; /* Chia 2 cột cho gọn */
+}
+
+.input-row .input-group {
+    flex: 1;
+}
+
+.register-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745; /* Màu xanh lá cho nút đăng ký */
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Responsive cho điện thoại */
+@media (max-width: 480px) {
+    .input-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}

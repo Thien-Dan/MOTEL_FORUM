@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký - Roommate Finder</title>
+    <link rel="stylesheet" href="register.css">
+</head>
+<body>
+    <div class="register-container">
+        <form class="register-form" id="registerForm">
+            <h2>Đăng Ký Tài Khoản</h2>
+            
+            <div class="input-row">
+                <div class="input-group">
+                    <label>Họ và tên</label>
+                    <input type="text" id="fullname" placeholder="Nguyễn Văn A" required>
+                </div>
+                <div class="input-group">
+                    <label>Tên đăng nhập</label>
+                    <input type="text" id="username" placeholder="user123" required>
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="input-group">
+                    <label>Ngày sinh</label>
+                    <input type="date" id="dob" required>
+                </div>
+                <div class="input-group">
+                    <label>Số điện thoại</label>
+                    <input type="tel" id="phone" placeholder="0901234567" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Mật khẩu</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+
+            <div class="input-group">
+                <label>Nhập lại mật khẩu</label>
+                <input type="password" id="confirmPassword" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="register-btn">Xác Nhận Đăng Ký</button>
+            
+            <div class="extra-links">
+                <p>Đã có tài khoản? <a href="../login/login.html">Quay lại đăng nhập</a></p>
+            </div>
+        </form>
+    </div>
+
+    <script src="register.js"></script>
+</body>
+</html>

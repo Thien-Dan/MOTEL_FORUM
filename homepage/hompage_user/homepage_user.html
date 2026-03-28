@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4D_Trọ.vn - Nền tảng tìm bạn ở ghép</title>
+    <link rel="stylesheet" href="./homepage_user.css"> 
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">4D_Trọ.vn</div>
+        
+        <div class="user-logged-in">
+            <div class="action-icon" title="Tin nhắn">
+                <img src="./pic/tin_nhan.png" height="40px"> <span class="notification-badge">0</span>
+            </div>
+            
+            <div class="action-icon" title="Thông báo">
+                <img src="./pic/thong_bao.png" height="40px"> <span class="notification-badge">0</span>
+            </div>
+            
+            <div class="user-profile" onclick="toggleUserMenu(event)">
+                <img src="https://via.placeholder.com/40" alt="Avatar" class="avatar-img">
+                <span class="user-name" id="displayUsername">Thiện Đan</span>
+                <span class="dropdown-arrow">▼</span>
+                
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="#">👤 Tài khoản của tôi</a>
+                    <a href="#">📝 Các bài đã đăng</a>
+                    <hr>
+                    <a href="#" onclick="logout()" class="logout-text">🚪 Đăng xuất</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Tìm người ở ghép hợp ý, không lo chi phí</h1>
+            <p>Kết nối hàng ngàn phòng trọ và những người bạn cùng phòng lý tưởng</p>
+        </div>
+        <div class="hero-image">
+            <img src="./pic/ĐAN.jpg" class="coder">
+            <img src="./pic/ĐẠT.jpg" class="coder">
+            <img src="./pic/Đồng.jpg" class="coder">
+            <img src="./pic/Đông.jpg" class="coder">
+        </div>
+    </section>
+    
+    <section class="search-section">
+        <div class="search-box">
+            <select class="filter-select" id="postTypeFilter">
+                <option value="">Tất cả nhu cầu</option>
+                <option value="rent_out">Chủ cho thuê</option>
+                <option value="find_roommate">Tìm người ở ghép</option>
+                <option value="find_room">Tìm phòng</option>
+            </select>
+            <input type="text" id="searchInput" placeholder="Nhập khu vực (VD: Quận 7, Bình Thạnh...)" class="search-input" />
+            <select class="filter-select" id="priceFilter">
+                <option value="">Mức giá</option>
+                <option value="<2m">Dưới 2 triệu</option>
+                <option value="2m-4m">2 - 4 triệu</option>
+                <option value=">4m">Trên 4 triệu</option>
+            </select>
+            <button class="btn-search" onclick="searchPosts()">Tìm kiếm</button>
+        </div>
+    </section>
+
+    <section class="recent-posts-section">
+        <h2>Bài đăng mới nhất</h2>
+        <div class="post-grid" id="post-grid">
+            </div>
+    </section>
+
+    <script src="./homepage_user.js"></script>
+</body>
+</html>
