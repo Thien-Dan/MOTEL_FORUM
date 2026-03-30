@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký - Hệ Thống Ghép Trọ Cao Cấp</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="register.css">
+</head>
+<body>
+    <div class="auth-wrapper">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h2>Tạo tài khoản mới</h2>
+                <p>Nhanh chóng kết nối và khám phá phòng trọ</p>
+            </div>
+            
+            <form class="auth-form" id="registerForm">
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="fullname">Họ và tên</label>
+                        <input type="text" id="fullname" placeholder="Vd: Nguyễn Văn A" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="username">Tên đăng nhập</label>
+                        <input type="text" id="username" placeholder="Vd: user123" required>
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="email">Địa chỉ Email</label>
+                        <input type="email" id="email" placeholder="example@gmail.com" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="phone">Số điện thoại</label>
+                        <input type="tel" id="phone" placeholder="Vd: 0901234567" required>
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="cccd">Số CCCD</label>
+                        <input type="text" id="cccd" placeholder="Nhập 12 số CCCD" maxlength="12" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="dob">Ngày sinh</label>
+                        <input type="date" id="dob" required>
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="password">Mật khẩu</label>
+                        <input type="password" id="password" placeholder="••••••••" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="confirmPassword">Nhập lại chữ ký</label>
+                        <input type="password" id="confirmPassword" placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="auth-btn">Xác Nhận Đăng Ký</button>
+
+                <div class="auth-redirect">
+                    <p>Đã có tài khoản? <a href="../login/login.html">Đăng nhập ngay</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="register.js"></script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+    /* Hình nền không gian phòng khách hiện đại, rực sáng và sang trọng */
+    background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Lớp phủ mờ nhẹ cho nền để tránh bị xao nhãng */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.15); /* Rất nhẹ */
+    z-index: 1;
+}
+
+.auth-wrapper {
+    width: 100%;
+    max-width: 440px;
+    padding: 20px;
+    z-index: 2; /* Nằm trên lớp phủ nền */
+}
+
+/* Hài hoà giữa hình nền bằng Glassmorphism hiện đại */
+.auth-card {
+    background: rgba(255, 255, 255, 0.85); /* Trắng sữa, có độ xuyên thấu */
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 24px;
+    padding: 45px 40px;
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 35px 55px rgba(0, 0, 0, 0.25);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.auth-header h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+.auth-header p {
+    font-size: 14px;
+    color: #555;
+    font-weight: 500;
+}
+
+.input-group {
+    margin-bottom: 22px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    font-size: 14.5px;
+    color: #222;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.input-group input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.15);
+}
+
+.input-group input::placeholder {
+    color: #a0a0a0;
+}
+
+.auth-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.remember-me input {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: #007bff;
+}
+
+.remember-me span {
+    font-size: 13px;
+    color: #444;
+    font-weight: 500;
+    user-select: none;
+}
+
+.forgot-pwd {
+    font-size: 13px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.forgot-pwd:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 15px rgba(0, 123, 255, 0.3);
+    letter-spacing: 0.5px;
+}
+
+.auth-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 20px rgba(0, 123, 255, 0.4);
+}
+
+.auth-btn:active {
+    transform: translateY(0);
+}
+
+.auth-redirect {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+    font-weight: 500;
+}
+
+.auth-redirect a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.2s;
+}
+
+.auth-redirect a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.btn-loading {
+    position: relative;
+    color: transparent !important;
+    pointer-events: none;
+}
+
+.btn-loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    margin-top: -10px;
+    margin-left: -10px;
+    border: 2px solid #ffffff;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 35px 25px;
+    }
+}

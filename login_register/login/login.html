@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập - Hệ Thống Ghép Trọ Cao Cấp</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="auth-wrapper">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h2>Chào mừng trở lại</h2>
+                <p>Khám phá không gian sống lý tưởng của bạn</p>
+            </div>
+            <form class="auth-form" id="loginForm">
+                <div class="input-group">
+                    <label for="username">Tên đăng nhập</label>
+                    <input type="text" id="username" name="username" placeholder="Nhập tên đăng nhập" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
+                </div>
+                <div class="auth-actions">
+                    <label class="remember-me">
+                        <input type="checkbox" name="remember">
+                        <span>Lưu đăng nhập</span>
+                    </label>
+                    <a href="../forgot_password/forgot_password.html" class="forgot-pwd">Quên mật khẩu?</a>
+                </div>
+                <button type="submit" class="auth-btn">Đăng Nhập</button>
+                
+                <p class="auth-redirect">
+                    Chưa có tài khoản? <a href="../register/register.html">Đăng ký ngay</a>
+                </p>
+            </form>
+        </div>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html>
