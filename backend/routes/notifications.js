@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db'); // connection pool mysql2 của bạn
+const db = require('../index'); 
 
 // GET /api/notifications?user_id=5
 // Lấy 20 thông báo mới nhất của user

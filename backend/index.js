@@ -14,8 +14,8 @@ const dbConfig = {
     user: 'root',
     password: '',
     database: 'phongtro'
-};
-
+}; 
+ 
 // --- API ĐĂNG NHẬP ---
 app.post('/api/login', async (req, res) => {
     // Frontend của bạn gửi 'username', ta sẽ map nó với cột 'login_name' trong CSDL
@@ -142,9 +142,15 @@ app.post('/api/register', async (req, res) => {
     }
 });
 
+// THÊM POOL — dùng chung cho toàn app
+const pool = mysql.createPool(dbConfig);
+module.exports = pool; // ← để notifications.js dùng được
+
+// MOUNT ROUTE — đặt TRƯỚC app.listen
+const notificationRoutes = require('./routes/notifications');
+app.use('/api/notifications', notificationRoutes);
+
 app.listen(port, () => {
     console.log(`Server Node.js đang chạy tại http://127.0.0.1:${port}`);
 });
 
-const notificationRoutes = require('./routes/notifications');
-app.use('/api/notifications', notificationRoutes);
