@@ -185,40 +185,136 @@
     transform: rotate(12deg) translateX(120px);
     z-index: 1;
 }
-/* THANH TÌM KIẾM */
-.search-section { display: flex; justify-content: center; margin-top: 30px; }
+/* THANH TÌM KIẾM MỚI (MODERN) */
+.search-section { 
+    display: flex; justify-content: center; 
+    margin-top: -40px; /* Nhô lên đè một chút vào hero section */
+    position: relative; z-index: 10;
+}
+.search-container {
+    background: white; 
+    padding: 25px 35px; 
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    width: 90%; max-width: 1000px;
+}
+.search-title {
+    margin-bottom: 15px; font-size: 20px; color: #333;
+    font-weight: 700;
+}
 .search-box {
-  background: white; padding: 15px; border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  display: flex; gap: 10px; width: 90%; max-width: 800px;
+    display: flex; align-items: center; 
+    background: #f8f9fa; border-radius: 50px;
+    padding: 10px 15px; border: 1px solid #eee;
 }
+.search-group {
+    display: flex; align-items: center; gap: 8px; flex: 1;
+    padding: 0 15px;
+}
+.search-group.flex-2 { flex: 2; }
+.search-icon { font-size: 18px; color: #666; }
 .search-input, .filter-select {
-  padding: 12px; border: 1px solid #ddd; border-radius: 5px; flex: 1; font-size: 15px;
+    border: none; background: transparent; 
+    outline: none; font-size: 15px; 
+    width: 100%; color: #333;
+    cursor: pointer;
 }
-.btn-search {
-  background: #ff5a5f; color: white; border: none; padding: 0 25px;
-  border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 16px;
+.search-input::placeholder { color: #888; }
+.divider {
+    height: 30px; width: 1px; background: #ddd;
 }
-.btn-search:hover { background: #e0484d; }
+.btn-search-modern {
+    background: #FF385C; color: white; 
+    border: none; padding: 12px 25px;
+    border-radius: 40px; cursor: pointer; 
+    font-weight: bold; font-size: 16px;
+    display: flex; align-items: center; gap: 8px;
+    transition: background 0.3s, transform 0.2s;
+    white-space: nowrap;
+}
+.btn-search-modern:hover { background: #D90B38; transform: scale(1.05); }
 
-/* DANH SÁCH BÀI ĐĂNG */
-.recent-posts-section { padding: 50px 10%; }
-.recent-posts-section h2 { margin-bottom: 30px; color: #333; }
-.post-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; }
-.post-card {
-  background: white; border-radius: 10px; overflow: hidden;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.08); transition: transform 0.2s;
+/* DANH SÁCH BÀI ĐĂNG - THEO DẠNG TIMELINE (GIỐNG FB/INSTAGRAM) */
+.feed-section {
+    padding: 40px 15px; 
+    background-color: #f0f2f5; /* Màu nền xám nhạt như Facebook */
+    display: flex; justify-content: center;
 }
-.post-card:hover { transform: translateY(-5px); }
-.post-image { width: 100%; height: 180px; object-fit: cover; }
-.post-info { padding: 15px; }
-.badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; margin-bottom: 10px; }
-.badge.rent_out { background: #e3f2fd; color: #1976d2; }
-.badge.find_roommate { background: #e8f5e9; color: #388e3c; }
-.badge.find_room { background: #fff3e0; color: #f57c00; }
-.post-title { font-size: 16px; margin-bottom: 10px; color: #222; }
-.post-price { color: #d32f2f; font-weight: bold; margin-bottom: 5px; }
-.post-address { color: #666; font-size: 13px; }
+.feed-container {
+    width: 100%; max-width: 680px; /* Độ rộng phổ biến của news feed */
+    display: flex; flex-direction: column; gap: 20px;
+}
+
+/* THẺ BÀI ĐĂNG (POST) */
+.post-card-modern {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    overflow: hidden;
+    padding: 15px 0 0;
+}
+.post-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 0 15px 12px;
+}
+.post-author-avatar {
+    width: 40px; height: 40px; 
+    border-radius: 50%; object-fit: cover; border: 1px solid #ddd;
+}
+.post-author-info {
+    display: flex; flex-direction: column;
+}
+.post-author-name { font-weight: bold; font-size: 15px; color: #050505; cursor:pointer; }
+.post-author-name:hover { text-decoration: underline; }
+.post-time { font-size: 13px; color: #65676B; display:flex; align-items: center; gap:5px; }
+
+.post-body { padding: 0 15px 15px; }
+.post-title { font-size: 16px; font-weight: bold; margin-bottom: 8px; color: #050505; }
+.post-content { font-size: 15px; color: #050505; line-height: 1.5; margin-bottom: 10px; white-space: pre-wrap; }
+
+/* Thông tin chi tiết phòng (Giá, dt, địa chỉ) - Nổi bật */
+.post-details-box {
+    background: #f7f8fa; border-left: 4px solid #FF385C;
+    padding: 10px; margin-bottom: 12px; border-radius: 0 8px 8px 0;
+}
+.post-details-box p { font-size: 14px; margin: 3px 0; color: #333; }
+.highlight-price { color: #E53935; font-weight: bold; font-size: 16px; }
+
+/* Hình ảnh bài viết */
+.post-media {
+    width: 100%; max-height: 500px;
+    overflow: hidden;
+    display: flex; justify-content: center;
+    background: #000;
+}
+.post-media img {
+    width: 100%; height: auto;
+    object-fit: cover;
+    max-height: 500px;
+}
+
+/* Tương tác (Like, Comment, Share) */
+.post-actions {
+    display: flex; justify-content: space-between;
+    padding: 5px 15px;
+    border-top: 1px solid #ebedf0;
+}
+.action-btn {
+    flex: 1; display: flex; justify-content: center; align-items: center; gap: 8px;
+    padding: 8px 0; border: none; background: transparent;
+    color: #65676B; font-weight: 600; font-size: 15px;
+    cursor: pointer; border-radius: 4px;
+    transition: background 0.2s;
+}
+.action-btn:hover { background: #f2f2f2; }
+.action-btn i { font-style: normal; font-size: 18px; }
+
+/* Badge loại bài viết (Tìm phòng / Tìm người) */
+.post-badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; margin-bottom: 8px; }
+.post-badge.rent_out { background: #e3f2fd; color: #1976d2; }
+.post-badge.find_roommate { background: #e8f5e9; color: #388e3c; }
+
+.loading-post { text-align: center; padding: 20px; color: #666; font-style: italic; }
 
 .notification-panel {
     display: none;

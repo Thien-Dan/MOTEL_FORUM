@@ -150,6 +150,9 @@ module.exports = pool; // ← để notifications.js dùng được
 const notificationRoutes = require('./routes/notifications');
 app.use('/api/notifications', notificationRoutes);
 
+const postRoutes = require('./routes/posts');
+app.use('/api/posts', postRoutes);
+
 app.listen(port, () => {
     console.log(`Server Node.js đang chạy tại http://127.0.0.1:${port}`);
 });
