@@ -13,9 +13,9 @@
         
         <div class="user-logged-in">
     
-            <div class="action-icon" title="Tin nhắn">
+            <div class="action-icon" title="Tin nhắn" onclick="window.location.href='./chat.html'" style="cursor:pointer;">
                 <img src="./pic/tin_nhan.png" height="30px">
-                <span class="notification-badge">0</span>
+                <span class="notification-badge" id="msg-badge">0</span>
             </div>
             
             <div class="action-icon" title="Thông báo" onclick="toggleNotification(event)">

@@ -119,7 +119,8 @@ CREATE TABLE ConversationParticipants (
     user_id INT,
 
     FOREIGN KEY (conversation_id) REFERENCES Conversations(id) ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES Users(id)
+    FOREIGN KEY (user_id) REFERENCES Users(id),
+    UNIQUE KEY unique_conversation_participant (conversation_id, user_id)
 );
 
 -- TIN NHAN
@@ -128,11 +129,28 @@ CREATE TABLE Messages (
     conversation_id INT,
     sender_id INT,
     content TEXT,
+    message_type ENUM('text', 'image', 'file') DEFAULT 'text',
     is_read BOOLEAN DEFAULT FALSE,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    expires_at DATETIME DEFAULT NULL,
+    deleted_at DATETIME DEFAULT NULL,
 
     FOREIGN KEY (conversation_id) REFERENCES Conversations(id) ON DELETE CASCADE,
     FOREIGN KEY (sender_id) REFERENCES Users(id)
+);
+
+CREATE TABLE MessageAttachments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    message_id INT,
+    file_path TEXT NOT NULL,
+    file_name VARCHAR(255),
+    mime_type VARCHAR(100),
+    file_size BIGINT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    expires_at DATETIME DEFAULT NULL,
+    deleted_at DATETIME DEFAULT NULL,
+
+    FOREIGN KEY (message_id) REFERENCES Messages(id) ON DELETE CASCADE
 );
 
 -- REPORT

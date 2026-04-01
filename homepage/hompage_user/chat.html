@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tin nhắn - 4D_Trọ.vn</title>
+    <meta name="description" content="Nhắn tin trực tiếp với chủ trọ và người tìm phòng trên 4D_Trọ.vn">
+    <link rel="stylesheet" href="./chat.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="logo" onclick="window.location.href='./homepage_user.html'" style="cursor:pointer;">4D_Trọ.vn</div>
+        <div class="user-logged-in">
+            <div class="action-icon" title="Tin nhắn" style="position:relative;">
+                <img src="./pic/tin_nhan.png" height="30px" style="filter: brightness(0) invert(1);">
+                <span class="notification-badge" id="msg-badge">0</span>
+            </div>
+            <div class="action-icon" title="Thông báo" onclick="window.location.href='./homepage_user.html'">
+                <img src="./pic/thong_bao.png" height="30px">
+            </div>
+            <div class="user-profile" onclick="toggleUserMenu(event)">
+                <img src="https://via.placeholder.com/40" alt="Avatar" class="avatar-img" id="userAvatar">
+                <span class="user-name" id="displayUsername">User</span>
+                <span class="dropdown-arrow">▼</span>
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="#">👤 Tài khoản của tôi</a>
+                    <a href="#">📝 Các bài đã đăng</a>
+                    <hr>
+                    <a href="#" onclick="logout()" class="logout-text">🚪 Đăng xuất</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- CHAT CONTAINER -->
+    <div class="chat-container">
+
+        <!-- SIDEBAR: Danh sách conversations -->
+        <aside class="chat-sidebar" id="chatSidebar">
+            <div class="sidebar-header">
+                <h2>Tin nhắn</h2>
+            </div>
+            <div class="conversation-list" id="conversationList">
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>Đang tải cuộc trò chuyện...</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- CHAT PANEL: Khung chat -->
+        <main class="chat-panel" id="chatPanel">
+            <!-- Trạng thái chưa chọn conversation -->
+            <div class="chat-empty-state" id="chatEmptyState">
+                <div class="empty-icon">💬</div>
+                <h3>Chọn một cuộc trò chuyện</h3>
+                <p>Chọn cuộc trò chuyện bên trái để bắt đầu nhắn tin</p>
+            </div>
+
+            <!-- Header conversation đang mở -->
+            <div class="chat-header" id="chatHeader" style="display:none;">
+                <button class="btn-back" id="btnBack" onclick="backToSidebar()">←</button>
+                <img class="chat-avatar" id="chatAvatar" src="https://via.placeholder.com/40" alt="">
+                <div class="chat-header-info">
+                    <div class="chat-contact-name" id="chatContactName">Tên người nhận</div>
+                    <div class="chat-post-link" id="chatPostLink"></div>
+                </div>
+            </div>
+
+            <!-- Vùng hiển thị messages -->
+            <div class="messages-area" id="messagesArea" style="display:none;">
+                <div class="messages-list" id="messagesList"></div>
+            </div>
+
+            <!-- Input bar -->
+            <div class="chat-input-bar" id="chatInputBar" style="display:none;">
+                <label class="btn-attach" for="fileInput" title="Đính kèm ảnh">
+                    📎
+                </label>
+                <input type="file" id="fileInput" accept="image/*" style="display:none;" onchange="handleFileSelect(event)">
+                
+                <!-- Preview ảnh trước khi gửi -->
+                <div class="attachment-preview" id="attachmentPreview" style="display:none;">
+                    <img id="previewImg" src="" alt="">
+                    <button class="btn-remove-attach" onclick="removeAttachment()">✕</button>
+                </div>
+
+                <input type="text" class="chat-input" id="chatInput" placeholder="Nhập tin nhắn..." autocomplete="off">
+                <button class="btn-send" id="btnSend" onclick="sendMessage()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="currentColor"/>
+                    </svg>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script src="./chat.js"></script>
+</body>
+</html>

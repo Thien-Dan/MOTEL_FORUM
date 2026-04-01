@@ -2,6 +2,8 @@ const express = require('express');
 const mysql = require('mysql2/promise');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
+const path = require('path');
+const fs = require('fs');
 
 const app = express();
 const port = 3000;
@@ -9,13 +11,18 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
+const uploadsDir = path.join(__dirname, 'uploads');
+const messageUploadsDir = path.join(uploadsDir, 'messages');
+fs.mkdirSync(messageUploadsDir, { recursive: true });
+app.use('/uploads', express.static(uploadsDir));
+
 const dbConfig = {
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'phongtro'
-}; 
- 
+    database: 'PHONGTRO'
+};
+
 // --- API ĐĂNG NHẬP ---
 app.post('/api/login', async (req, res) => {
     // Frontend của bạn gửi 'username', ta sẽ map nó với cột 'login_name' trong CSDL
@@ -46,7 +53,7 @@ app.post('/api/login', async (req, res) => {
         }
 
         // Trả về role để frontend điều hướng (Admin / User)
-        res.status(200).json({ 
+        res.status(200).json({
             message: "Đăng nhập thành công!",
             userId: user.id,
             username: user.login_name,
@@ -109,7 +116,7 @@ app.post('/api/register', async (req, res) => {
 
     try {
         const connection = await mysql.createConnection(dbConfig);
-        
+
         // Kiểm tra xem tên đăng nhập HOẶC email đã tồn tại chưa
         const [existingUsers] = await connection.execute(
             'SELECT id FROM Users WHERE login_name = ? OR email = ?',
@@ -129,9 +136,9 @@ app.post('/api/register', async (req, res) => {
             'INSERT INTO Users (fullname, login_name, email, password, phone, CCCD, birthday) VALUES (?, ?, ?, ?, ?, ?, ?)',
             [fullname, username, email, hashedPassword, phone, CCCD, birthday]
         );
-        
+
         // (Đã loại bỏ INSERT INTO User_Preferences dư thừa của base cũ)
-        
+
         await connection.end();
 
         res.status(201).json({ message: "Đăng ký tài khoản thành công!" });
@@ -144,11 +151,71 @@ app.post('/api/register', async (req, res) => {
 
 // THÊM POOL — dùng chung cho toàn app
 const pool = mysql.createPool(dbConfig);
-module.exports = pool; // ← để notifications.js dùng được
+module.exports = pool; // ← để notifications.js và chat.js dùng được
 
 // MOUNT ROUTE — đặt TRƯỚC app.listen
 const notificationRoutes = require('./routes/notifications');
 app.use('/api/notifications', notificationRoutes);
+const chatRoutes = require('./routes/chat');
+app.use('/api/chat', chatRoutes);
+
+const cleanupExpiredResources = async () => {
+    try {
+        const [expiredAttachments] = await pool.query(`
+            SELECT id, file_path
+            FROM MessageAttachments
+            WHERE deleted_at IS NOT NULL
+               OR (expires_at IS NOT NULL AND expires_at <= NOW())
+        `);
+
+        for (const attachment of expiredAttachments) {
+            try {
+                const absPath = path.join(__dirname, attachment.file_path);
+                if (fs.existsSync(absPath)) fs.unlinkSync(absPath);
+            } catch (err) {
+                console.warn('Không xóa được file đính kèm hết hạn:', attachment.file_path, err.message);
+            }
+        }
+
+        if (expiredAttachments.length) {
+            const ids = expiredAttachments.map(a => a.id);
+            await pool.query(`DELETE FROM MessageAttachments WHERE id IN (?)`, [ids]);
+        }
+
+        const [messageAttachmentFiles] = await pool.query(`
+            SELECT a.id, a.file_path
+            FROM MessageAttachments a
+            JOIN Messages m ON m.id = a.message_id
+            WHERE m.deleted_at IS NOT NULL
+               OR (m.expires_at IS NOT NULL AND m.expires_at <= NOW())
+        `);
+
+        for (const attachment of messageAttachmentFiles) {
+            try {
+                const absPath = path.join(__dirname, attachment.file_path);
+                if (fs.existsSync(absPath)) fs.unlinkSync(absPath);
+            } catch (err) {
+                console.warn('Không xóa được file đính kèm liên quan message hết hạn:', attachment.file_path, err.message);
+            }
+        }
+
+        if (messageAttachmentFiles.length) {
+            const ids = messageAttachmentFiles.map(a => a.id);
+            await pool.query(`DELETE FROM MessageAttachments WHERE id IN (?)`, [ids]);
+        }
+
+        await pool.query(`
+            DELETE FROM Messages
+            WHERE deleted_at IS NOT NULL
+               OR (expires_at IS NOT NULL AND expires_at <= NOW())
+        `);
+    } catch (err) {
+        console.error('Lỗi cleanup expired resources:', err);
+    }
+};
+
+cleanupExpiredResources();
+setInterval(cleanupExpiredResources, 60 * 60 * 1000);
 
 app.listen(port, () => {
     console.log(`Server Node.js đang chạy tại http://127.0.0.1:${port}`);

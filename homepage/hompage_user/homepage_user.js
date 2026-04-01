@@ -123,3 +123,37 @@ function timeAgo(dateStr) {
     if (diff < 86400) return `${Math.floor(diff/3600)} giờ trước`;
     return `${Math.floor(diff/86400)} ngày trước`;
 }
+
+// ── LOAD CHAT UNREAD BADGE ──
+async function loadChatUnreadBadge() {
+    const userId = localStorage.getItem("userId");
+    if (!userId) return;
+
+    try {
+        const res = await fetch(`/api/chat/unread-count?user_id=${userId}`);
+        const data = await res.json();
+        const badge = document.getElementById("msg-badge");
+        if (badge) {
+            const count = data.unread_count || 0;
+            badge.textContent = count;
+            badge.style.display = count > 0 ? 'inline-flex' : 'none';
+        }
+    } catch (err) {
+        console.error("Lỗi load chat unread badge:", err);
+    }
+}
+
+// Hiển thị username + load badges khi trang mở
+document.addEventListener('DOMContentLoaded', () => {
+    const username = localStorage.getItem("username");
+    if (username) {
+        const el = document.getElementById("displayUsername");
+        if (el) el.textContent = username;
+    }
+
+    // Load chat unread badge
+    loadChatUnreadBadge();
+
+    // Auto-refresh badge mỗi 30 giây
+    setInterval(loadChatUnreadBadge, 30000);
+});
