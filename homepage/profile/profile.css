@@ -1,0 +1,83 @@
+/* --- Root Variables & Reset --- */
+:root {
+    --primary-color: #4facfe; /* Xanh dương hiện đại */
+    --secondary-color: #00f2fe; /* Xanh ngọc gradient */
+    --bg-color: #f0f2f5;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --text-main: #333;
+    --text-sub: #777;
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+    --border-radius: 16px;
+    --transition: all 0.3s ease;
+}
+
+* { box-sizing: border-box; }
+body { font-family: 'Poppins', sans-serif; background-color: var(--bg-color); color: var(--text-main); margin: 0; padding: 0; outline: none; }
+.container { max-width: 1200px; margin: 20px auto; padding: 0 20px 40px; }
+.card { background: var(--card-bg); border-radius: var(--border-radius); box-shadow: var(--shadow); border: 1px solid rgba(255, 255, 255, 0.3); backdrop-filter: blur(5px); }
+
+/* --- Navbar --- */
+.navbar { background: white; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow); position: sticky; top: 0; z-index: 1000; }
+.navbar .logo { font-size: 1.5rem; font-weight: 600; color: var(--text-main); }
+.navbar .logo span { color: var(--primary-color); }
+.navbar nav a { text-decoration: none; color: var(--text-sub); margin-left: 20px; font-size: 0.9rem; transition: var(--transition); }
+.navbar nav a:hover { color: var(--primary-color); }
+.navbar nav a.logout-btn { color: #ff6b6b; font-size: 1.1rem; }
+
+/* --- Profile Header --- */
+.profile-header { position: relative; overflow: hidden; margin-bottom: 20px; padding-bottom: 20px; }
+.cover-photo { height: 200px; background: linear-gradient(to right, var(--primary-color), var(--secondary-color)); border-radius: var(--border-radius) var(--border-radius) 0 0; }
+.profile-info-row { display: flex; align-items: center; padding: 0 30px; margin-top: -60px; /* Avatar đè lên ảnh bìa */ }
+
+.avatar-wrapper { position: relative; }
+#user-avatar { width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 5px solid white; box-shadow: var(--shadow); }
+.change-avatar-btn { position: absolute; bottom: 5px; right: 5px; background: white; border: none; border-radius: 50%; width: 35px; height: 35px; cursor: pointer; color: var(--text-sub); box-shadow: var(--shadow); transition: var(--transition); }
+.change-avatar-btn:hover { background: #eee; color: var(--text-main); }
+
+.user-titles { margin-left: 20px; flex-grow: 1; margin-top: 60px; /* Bù lại khoảng âm của row */ }
+#user-fullname { margin: 0; font-size: 1.8rem; font-weight: 600; }
+.username-tag { margin: 0; color: var(--text-sub); font-size: 0.95rem; }
+
+#edit-btn { background: white; border: 1px solid #ddd; padding: 10px 20px; border-radius: 30px; cursor: pointer; font-family: inherit; font-size: 0.9rem; font-weight: 400; transition: var(--transition); display: flex; align-items: center; gap: 8px; color: var(--text-main); margin-top: 60px; }
+#edit-btn:hover { background: #f5f5f5; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+
+/* --- Profile Content Grid --- */
+.profile-content-grid { display: grid; grid-template-columns: 320px 1fr; gap: 20px; align-items: start; }
+
+/* --- Contact Card --- */
+.contact-card { padding: 25px; position: sticky; top: 90px; }
+.contact-card h3 { margin-top: 0; font-size: 1.1rem; font-weight: 600; border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 20px; }
+.contact-card h3 i { color: var(--primary-color); margin-right: 8px; }
+
+.info-item { display: flex; align-items: center; margin-bottom: 20px; gap: 15px; }
+.info-item i { font-size: 1.2rem; color: var(--primary-color); width: 25px; text-align: center; }
+.info-item label { font-size: 0.8rem; color: var(--text-sub); display: block; margin-bottom: 2px; }
+.info-item p { margin: 0; font-size: 0.95rem; font-weight: 400; color: var(--text-main); word-break: break-word; }
+
+/* --- Posts Section --- */
+.posts-section h2 { font-size: 1.1rem; font-weight: 600; margin-top: 0; margin-bottom: 20px; }
+.posts-section h2 i { color: var(--secondary-color); margin-right: 8px; }
+.posts-list-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+
+/* --- Mẫu Card Bài Đăng (Sẽ dùng trong Giai đoạn 4) --- */
+.post-card { background: white; border-radius: var(--border-radius); overflow: hidden; border: 1px solid #eee; transition: var(--transition); cursor: pointer; }
+.post-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.08); }
+.post-thumb { height: 160px; background-color: #ddd; background-size: cover; background-position: center; }
+.post-details { padding: 15px; }
+.post-details h4 { margin: 0; font-size: 1rem; font-weight: 600; color: var(--text-main); margin-bottom: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.post-details .price { color: #ff6b6b; font-weight: 600; font-size: 1.1rem; margin-bottom: 5px; }
+.post-details .area { color: var(--text-sub); font-size: 0.85rem; }
+
+.loading-posts { grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--text-sub); font-size: 0.9rem; }
+.loading-posts i { margin-right: 8px; }
+
+/* --- Mobile Responsive --- */
+@media (max-width: 900px) {
+    .profile-content-grid { grid-template-columns: 1fr; }
+    .contact-card { position: relative; top: 0; }
+    .profile-info-row { flex-direction: column; text-align: center; margin-top: -65px; padding: 0 15px; }
+    .user-titles { margin-left: 0; margin-top: 15px; }
+    #edit-btn { margin-top: 15px; }
+    #user-fullname { font-size: 1.5rem; }
+    .navbar { padding: 15px 20px; }
+}

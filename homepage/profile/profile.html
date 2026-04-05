@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang cá nhân | Motel Forum</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">MOTEL<span>FORUM</span></div>
+        <nav>
+            <a href="../homepage/homepage.html"><i class="fas fa-home"></i> Trang chủ</a>
+            <a href="#" class="logout-btn"><i class="fas fa-sign-out-alt"></i></a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="profile-header card">
+            <div class="cover-photo"></div>
+            <div class="profile-info-row">
+                <div class="avatar-wrapper">
+                    <img id="user-avatar" src="https://via.placeholder.com/150" alt="Avatar">
+                    <button class="change-avatar-btn"><i class="fas fa-camera"></i></button>
+                </div>
+                <div class="user-titles">
+                    <h1 id="user-fullname">Đang tải...</h1>
+                    <p class="username-tag">@<span id="user-name">...</span></p>
+                </div>
+                <button id="edit-btn" style="display: none;">
+                    <i class="fas fa-user-edit"></i> Sửa hồ sơ
+                </button>
+            </div>
+        </section>
+
+        <div class="profile-content-grid">
+            
+            <aside class="contact-card card">
+                <h3><i class="fas fa-id-card"></i> Thông tin liên hệ</h3>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <label>Email</label>
+                        <p id="user-email">...</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <label>Số điện thoại</label>
+                        <p id="user-phone">...</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <div>
+                        <label>Thành viên từ</label>
+                        <p>01/01/2024 (Mẫu)</p>
+                    </div>
+                </div>
+            </aside>
+
+            <section class="posts-section">
+                <h2><i class="fas fa-building"></i> Bài đăng của bạn</h2>
+                <div id="posts-list" class="posts-list-container">
+                    <div class="loading-posts">
+                        <i class="fas fa-spinner fa-spin"></i> Đang tải danh sách bài đăng...
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="profile.js"></script>
+</body>
+</html>

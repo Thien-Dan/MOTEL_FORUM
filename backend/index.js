@@ -12,7 +12,7 @@ app.use(express.json());
 const dbConfig = {
     host: 'localhost',
     user: 'root',
-    password: '',
+    password: '123456',
     database: 'phongtro'
 }; 
  
